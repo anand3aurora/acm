@@ -1,0 +1,772 @@
+guid: 11a5394c-5b22-4dbd-9d39-1e632315cd85
+model:
+  name: Golden_MODEL_ACM
+  description: 'The Worksheet WS_golden contains information about store transactions such as customer, product, and sales details. Its data can be used to answer questions such as: What is the average household size of customers buying a particular product? What is the average discount offered in a particular region? What is the average sales growth percentage in a particular city? What is the average expense per store? What is the average quantity instock for a particular product type? What is the average floor space of a store? The data also includes date related columns such as date ordered, date shipped, expiry date, and last reorder date. (AI generated)'
+  model_tables:
+  - name: TS_CAMPAIGN
+    fqn: 049d42ca-7240-4c55-afc5-f41997382ebb
+  - name: TS_CUSTOMER
+    fqn: 22c8aa0e-acfd-48bb-a00e-4ffba514d383
+    joins:
+    - with: TS_CAMPAIGN
+      referencing_join: TS_CAMPAIGN_to_TS_CUSTOMER
+      type: INNER
+  - name: TS_SALES
+    alias: SalesTable
+    fqn: 243a39f3-6484-414b-b186-4a7947c0d168
+    joins:
+    - with: TS_CUSTOMER
+      referencing_join: TS_SALES_to_TS_CUSTOMER
+    - with: TS_PRODUCT_DETAILS
+      'on': '[TS_SALES::PRODUCT_DETAIL_ID] = [TS_PRODUCT_DETAILS::PRODUCT_DETAIL_ID]'
+      type: OUTER
+      cardinality: MANY_TO_ONE
+    - with: TS_STORES
+      referencing_join: TS_SALES_to_TS_STORES
+  - name: TS_INVENTORY
+    fqn: 8024dfeb-6535-4a4a-877e-e9e011aef0f2
+    joins:
+    - with: TS_PRODUCT_DETAILS
+      referencing_join: TS_INVENTORY_to_TS_PRODUCT_DETAILS
+    - with: TS_STORES
+      referencing_join: TS_INVENTORY_to_TS_STORES
+  - name: TS_LOCATION
+    fqn: 68c574c8-2b9a-4591-a6ce-a96c4bb9ea34
+    joins:
+    - with: StateTable
+      referencing_join: TS_LOCATION_to_TS_STATES
+  - name: TS_STORES
+    fqn: 51617f28-b4e8-47b3-9ceb-a5a7b9806739
+    joins:
+    - with: TS_LOCATION
+      referencing_join: TS_STORES_to_TS_LOCATION
+  - name: TS_PRODUCT_DETAILS
+    fqn: 1a8c4650-0079-4837-9476-b44d552cb9dc
+    joins:
+    - with: TS_PRODUCTS
+      referencing_join: TS_PRODUCT_DETAILS_to_TS_PRODUCTS
+  - name: TS_PRODUCTS
+    fqn: ef3b3721-7896-4b7e-8cfe-4aabfb7cde53
+  - name: TS_STATES
+    alias: StateTable
+    fqn: d2656e89-7c14-4499-b2f7-2e1ad007e1c0
+  formulas:
+  - id: formula_Sales Growth %
+    name: Sales Growth %
+    expr: ( ( group_aggregate ( sum ( [SalesTable::NET_SALES] ) , query_groups ( ) , { month ( [formula_date_orderedtime] ) = month ( [analysis date] ) } ) ) / ( group_aggregate ( sum ( [SalesTable::NET_SALES] ) , query_groups ( ) , { month ( [formula_date_orderedtime] ) = month ( [comparison date] ) } ) ) ) - 1
+  - id: formula_TAT
+    name: TAT
+    expr: diff_days ( [formula_date_shipped] , [formula_date_ordered] )
+  - id: formula_age_bucket
+    name: age_bucket
+    expr: if ( [TS_CUSTOMER::AGE] <= 20 ) then "1. <=20" else if ( [TS_CUSTOMER::AGE] <= 30 ) then "2. 20-30" else if ( [TS_CUSTOMER::AGE] <= 40 ) then "3. 30-40" else if ( [TS_CUSTOMER::AGE] <= 50 ) then "4. 40-50" else if ( [TS_CUSTOMER::AGE] <= 60 ) then "5. 50-60" else if ( [TS_CUSTOMER::AGE] <= 70 ) then "6. 60-70" else "7. >70"
+  - id: formula_avg sales per customer
+    name: avg sales per customer
+    expr: '[SalesTable::NET_SALES] / group_unique_count ( [TS_CUSTOMER::CUSTOMER_ID] )'
+  - id: formula_avg_sales_per_qty_sold
+    name: avg_sales_per_qty_sold
+    expr: group_sum ( [SalesTable::NET_SALES] , [formula_date_ordered] , [formula_date_shipped] , [TS_PRODUCTS::PRODUCT_TYPE] ) / group_sum ( [SalesTable::SALES_QUANTITY] , [formula_date_ordered] , [formula_date_shipped] , [TS_PRODUCTS::PRODUCT_TYPE] )
+  - id: formula_campaign enddate
+    name: campaign enddate
+    expr: add_days ( [TS_CAMPAIGN::CAMPAIGN_ENDDATE] , diff_days ( today ( ) , to_date ( "2023-12-31" , "%Y-%m-%d" ) ) )
+  - id: formula_campaign_startdate
+    name: campaign_startdate
+    expr: add_days ( [TS_CAMPAIGN::CAMPAIGN_STARTDATE] , diff_days ( today ( ) , to_date ( "2023-12-30" , "%Y-%m-%d" ) ) )
+  - id: formula_cumulative_sum ( AGE )
+    name: cumulative_sum ( AGE )
+    expr: cumulative_sum ( [TS_CUSTOMER::AGE] )
+  - id: formula_customer change %
+    name: customer change %
+    expr: safe_divide ( unique_count_if ( [formula_ly/ty] = "this year" , [TS_CUSTOMER::CUSTOMER_ID] ) - unique_count_if ( [formula_ly/ty] = "last year" , [TS_CUSTOMER::CUSTOMER_ID] ) , unique_count_if ( [formula_ly/ty] = "last year" , [TS_CUSTOMER::CUSTOMER_ID] ) )
+  - id: formula_date_orderedtime
+    name: date_orderedtime
+    expr: add_days ( [SalesTable::ORDER_DATETIME] , diff_days ( today ( ) , to_date ( "2023-12-31" , "%Y-%m-%d" ) ) )
+  - id: formula_date_shipped
+    name: date_shipped
+    expr: add_days ( [SalesTable::SHIP_DATE] , diff_days ( today ( ) , to_date ( "2023-12-31" , "%Y-%m-%d" ) ) )
+  - id: formula_dynamic date
+    name: dynamic date
+    expr: if ( [time grain] = 'daily' ) then [formula_date_ordered] else if ( [time grain] = 'weekly' ) then start_of_week ( [formula_date_ordered] ) else if ( [time grain] = 'monthly' ) then start_of_month ( [formula_date_ordered] ) else start_of_quarter ( [formula_date_ordered] )
+  - id: formula_expiry_date
+    name: expiry_date
+    expr: add_days ( [TS_INVENTORY::EXPIRATION_DATE] , diff_days ( today ( ) , to_date ( "2027-05-15" , "%Y-%m-%d" ) ) )
+  - id: formula_inventory_added
+    name: inventory_added
+    expr: add_days ( [TS_INVENTORY::DATE_ADDED] , diff_days ( today ( ) , to_date ( "2023-10-03" , "%Y-%m-%d" ) ) )
+  - id: formula_last_reorderdate
+    name: last_reorderdate
+    expr: add_days ( [TS_INVENTORY::LAST_REORDERDATE] , diff_days ( today ( ) , to_date ( "2024-09-27" , "%Y-%m-%d" ) ) )
+  - id: formula_month bi
+    name: month bi
+    expr: if ( month_number ( [formula_date_ordered] ) < 10 ) then concat ( '0' , to_string ( month_number ( [formula_date_ordered] ) ) , "-" , month ( [formula_date_ordered] ) ) else concat ( to_string ( month_number ( [formula_date_ordered] ) ) , "-" , month ( [formula_date_ordered] ) )
+  - id: formula_monthName
+    name: monthName
+    expr: month ( [formula_date_ordered] )
+  - id: formula_movAvg
+    name: movAvg
+    expr: if ( [rolling_params] = 'rolling 7 day avg' ) then moving_average ( [SalesTable::SALES_QUANTITY] , 6 , 0 , [formula_date_ordered] ) else if ( [rolling_params] = 'rolling 14 day avg' ) then moving_average ( [SalesTable::SALES_QUANTITY] , 13 , 0 , [formula_date_ordered] ) else if ( [rolling_params] = 'rolling 30 day avg' ) then moving_average ( [SalesTable::SALES_QUANTITY] , 29 , 0 , [formula_date_ordered] ) else moving_average ( [SalesTable::SALES_QUANTITY] , 59 , 0 , [formula_date_ordered] )
+  - id: formula_quantity change %
+    name: quantity change %
+    expr: safe_divide ( sum_if ( [formula_ly/ty] = "this year" , [SalesTable::SALES_QUANTITY] ) - sum_if ( [formula_ly/ty] = "last year" , [SalesTable::SALES_QUANTITY] ) , sum_if ( [formula_ly/ty] = "last year" , [SalesTable::SALES_QUANTITY] ) )
+  - id: formula_sales change %
+    name: sales change %
+    expr: safe_divide ( sum_if ( [formula_ly/ty] = "this year" , [SalesTable::NET_SALES] ) - sum_if ( [formula_ly/ty] = "last year" , [SalesTable::NET_SALES] ) , sum_if ( [formula_ly/ty] = "last year" , [SalesTable::NET_SALES] ) )
+  - id: formula_ly/ty
+    name: ly/ty
+    expr: if ( to_integer ( [formula_year#] ) = group_max ( to_integer ( [formula_year#] ) ) ) then "this year" else if ( to_integer ( [formula_year#] ) = group_max ( to_integer ( [formula_year#] ) ) - 1 ) then "last year" else "na"
+  - id: formula_sales_attr_in
+    name: sales_attr_in
+    expr: if ( [StateTable::REGION] = 'northwest' or isnull ( [StateTable::REGION] ) ) then false else true
+  - id: formula_sales_params
+    name: sales_params
+    expr: '[SalesTable::NET_SALES] * [int_params]'
+  - id: formula_testFX
+    name: testFX
+    expr: '[SalesTable::NET_SALES] * [int_params]'
+  - id: formula_year#
+    name: year#
+    expr: year ( [formula_date_ordered] )
+    properties:
+      column_type: ATTRIBUTE
+  - id: formula_date_ordered
+    name: date_ordered
+    expr: add_days ( [SalesTable::ORDER_DATE] , diff_days ( today ( ) , to_date ( "2023-12-31" , "%Y-%m-%d" ) ) )
+  filters:
+  - column:
+    - Age
+    oper: between
+    values:
+    - '10'
+    - '100'
+  columns:
+  - name: date_ordered
+    formula_id: formula_date_ordered
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - order_date
+      - date_of_order
+  - name: date_orderedtime
+    formula_id: formula_date_orderedtime
+    properties:
+      column_type: ATTRIBUTE
+      index_type: DONT_INDEX
+      synonyms:
+      - Order Date
+      - Order Placed Date
+  - name: date_shipped
+    formula_id: formula_date_shipped
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Dispatch Date
+      - Delivery Date
+  - name: campaign_startdate
+    formula_id: formula_campaign_startdate
+    properties:
+      column_type: ATTRIBUTE
+      index_type: DONT_INDEX
+      synonyms:
+      - commencement_date
+      - initiation_date
+  - name: campaign enddate
+    formula_id: formula_campaign enddate
+    properties:
+      column_type: ATTRIBUTE
+      index_type: DONT_INDEX
+      synonyms:
+      - Campaign Termination Date
+      - Campaign Finishing Date
+  - name: inventory_added
+    formula_id: formula_inventory_added
+    properties:
+      column_type: ATTRIBUTE
+      index_type: DONT_INDEX
+      synonyms:
+      - stock_added
+      - supply_added
+      format_pattern: MMM
+  - name: last_reorderdate
+    formula_id: formula_last_reorderdate
+    properties:
+      column_type: ATTRIBUTE
+      index_type: DONT_INDEX
+      synonyms:
+      - Last Reorder Date
+      - Final Reorder Date
+  - name: expiry_date
+    formula_id: formula_expiry_date
+    properties:
+      column_type: ATTRIBUTE
+      index_type: DONT_INDEX
+      synonyms:
+      - termination_date
+      - expiration_date
+  - name: TAT
+    formula_id: formula_TAT
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      synonyms:
+      - Turnaround Time
+      - Response Time
+  - name: Sales Growth %
+    formula_id: formula_Sales Growth %
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      synonyms:
+      - Growth Rate
+      - Sales Increase
+      format_pattern: '#.0%'
+  - name: age_bucket
+    formula_id: formula_age_bucket
+    properties:
+      column_type: ATTRIBUTE
+      index_type: DONT_INDEX
+      synonyms:
+      - Age Group
+      - Age Range
+  - name: avg_sales_per_qty_sold
+    formula_id: formula_avg_sales_per_qty_sold
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      synonyms:
+      - Average Sales
+      - Sales per Quantity
+  - name: month bi
+    formula_id: formula_month bi
+    properties:
+      column_type: ATTRIBUTE
+      index_type: DONT_INDEX
+      synonym_type: USER_DEFINED
+  - name: sales_params
+    formula_id: formula_sales_params
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+  - name: avg sales per customer
+    formula_id: formula_avg sales per customer
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+  - name: year#
+    formula_id: formula_year#
+    properties:
+      column_type: ATTRIBUTE
+      index_type: DONT_INDEX
+  - name: ly/ty
+    formula_id: formula_ly/ty
+    properties:
+      column_type: ATTRIBUTE
+      index_type: DONT_INDEX
+  - name: sales change %
+    formula_id: formula_sales change %
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+  - name: quantity change %
+    formula_id: formula_quantity change %
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      format_pattern: '#.000%'
+  - name: customer change %
+    formula_id: formula_customer change %
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+  - name: monthName
+    formula_id: formula_monthName
+    properties:
+      column_type: ATTRIBUTE
+      custom_order:
+      - january
+      - february
+      - march
+      - april
+      - may
+      - june
+      - july
+      - august
+      - september
+      - october
+      - november
+      - december
+  - name: movAvg
+    formula_id: formula_movAvg
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+  - name: testFX
+    formula_id: formula_testFX
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+  - name: sales_attr_in
+    formula_id: formula_sales_attr_in
+    properties:
+      column_type: ATTRIBUTE
+      index_type: DONT_INDEX
+  - name: dynamic date
+    formula_id: formula_dynamic date
+    properties:
+      column_type: ATTRIBUTE
+      index_type: DONT_INDEX
+  - name: Region
+    column_id: StateTable::REGION
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Area
+      geo_config:
+        region_name:
+          country: UNITED STATES
+          region_name: state
+  - name: State Name
+    column_id: TS_LOCATION::STATE_NAME
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - State Title
+      - State Designation
+  - name: County Name
+    column_id: TS_LOCATION::COUNTY_NAME
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - County Title
+      - County Designation
+  - name: Campaign Channel
+    column_id: TS_CAMPAIGN::CAMPAIGN_CHANNEL
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Campaign Medium
+      - Campaign Platform
+  - name: Discount Pct
+    column_id: SalesTable::DISCOUNT_PCT
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      synonyms:
+      - Discount Percentage
+      - Discount Rate
+  - name: Net Sales
+    column_id: SalesTable::NET_SALES
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      synonyms:
+      - Net Revenue
+      - Net Profit
+  - name: Campaign Status
+    column_id: TS_CAMPAIGN::CAMPAIGN_STATUS
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Campaign Condition
+      - Campaign State
+  - name: Budget
+    column_id: TS_CAMPAIGN::BUDGET
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      synonyms:
+      - Allocation
+      - Allowance
+      currency_type:
+        iso_code: USD
+  - name: Age
+    column_id: TS_CUSTOMER::AGE
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      synonyms:
+      - Years
+      - Generation
+  - name: Gender
+    column_id: TS_CUSTOMER::GENDER
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Sex
+  - name: Income
+    column_id: TS_CUSTOMER::INCOME
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      synonyms:
+      - Revenue
+      - Profit
+  - name: Household Size
+    column_id: TS_CUSTOMER::HOUSEHOLD_SIZE
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      synonyms:
+      - Household Number
+      - Household Measurement
+  - name: Marital Status
+    column_id: TS_CUSTOMER::MARITAL_STATUS
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Marriage Status
+      - Matrimonial Status
+  - name: Inventory Id
+    column_id: TS_INVENTORY::INVENTORY_ID
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Inventory Number
+  - name: Quantity Instock
+    column_id: TS_INVENTORY::QUANTITY_INSTOCK
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      synonyms:
+      - Quantity in Stock
+      - Quantity in Store
+      currency_type:
+        is_browser: true
+  - name: City
+    column_id: TS_LOCATION::CITY
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Town
+      - Municipality
+  - name: Population
+    column_id: TS_LOCATION::POPULATION
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      synonyms:
+      - Crowd
+      - People
+  - name: Density
+    column_id: TS_LOCATION::DENSITY
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      synonyms:
+      - Compactness
+      - Concentration
+  - name: Product Name
+    description: product name
+    column_id: TS_PRODUCT_DETAILS::PRODUCT_NAME
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Product Title
+      - Product Description
+  - name: Product Price
+    column_id: TS_PRODUCT_DETAILS::PRODUCT_PRICE
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      synonyms:
+      - Product Worth
+      - Product Cost
+  - name: Product Type
+    column_id: TS_PRODUCTS::PRODUCT_TYPE
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Product Category
+      - Product Class
+  - name: Sale Id
+    column_id: SalesTable::SALE_ID
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Transaction Id
+      - Sale Number
+  - name: Store Id
+    column_id: SalesTable::STORE_ID
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Store Number
+  - name: Product Detail Id
+    description: prod detail id
+    column_id: SalesTable::PRODUCT_DETAIL_ID
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Product Detail Number
+      - Product Detail Reference
+  - name: Product Id
+    column_id: SalesTable::PRODUCT_ID
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Item Id
+      - Product Number
+  - name: Customer Id
+    column_id: SalesTable::CUSTOMER_ID
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Customer Number
+  - name: Shipmode
+    column_id: SalesTable::SHIPMODE
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Delivery Mode
+  - name: Sales Quantity
+    description: sales qty
+    column_id: SalesTable::SALES_QUANTITY
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      synonyms:
+      - Sales Amount
+      - Sales Volume
+  - name: Tax
+    column_id: SalesTable::TAX
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      synonyms:
+      - Levy
+      - Duty
+  - name: Store Status
+    column_id: TS_STORES::STORE_STATUS
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - Store Condition
+      - Store State
+  - name: Floor Space
+    column_id: TS_STORES::FLOOR_SPACE
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      synonyms:
+      - Floor Area
+      - Floor Measurement
+  - name: Expense
+    column_id: TS_STORES::EXPENSE
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+      synonyms:
+      - Outlay
+      - Cost
+  - name: store_size
+    column_id: TS_STORES::STORE_SIZE
+    properties:
+      column_type: ATTRIBUTE
+      synonyms:
+      - store_area
+      - store_dimension
+  - name: cumulative_sum ( AGE )
+    formula_id: formula_cumulative_sum ( AGE )
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+  properties:
+    is_bypass_rls: false
+    join_progressive: false
+    sage_config:
+      is_sage_enabled: false
+  parameters:
+  - id: bd6eb0b1-2692-4b9e-8e4f-f65ef7cc08f7
+    name: Current Month
+    data_type: CHAR
+    default_value: 01-January
+    list_config:
+      list_choice:
+      - value: 01-January
+      - value: 02-February
+      - value: 03-March
+      - value: 04-April
+      - value: 05-May
+      - value: 06-June
+      - value: 07-July
+      - value: 08-August
+      - value: 09-September
+      - value: 10-October
+      - value: 11-November
+      - value: 12-December
+    description: ''
+  - id: 7d949a63-c89e-47f5-8065-ca8f56437f83
+    name: analysis date
+    data_type: DATE
+    default_value: 12/31/2023
+    range_config:
+      range_min: 01/01/2000
+      range_max: 12/31/2030
+      include_min: true
+      include_max: true
+    description: ''
+  - id: 36857c32-703a-46ae-8de1-e6944b19386e
+    name: bool_params
+    data_type: BOOL
+    default_value: 'true'
+    list_config:
+      list_choice:
+      - value: 'true'
+        display_name: 'yes'
+      - value: 'false'
+        display_name: 'no'
+    description: ''
+  - id: 13a619fc-52b4-4084-a15c-b60cdff73622
+    name: comparison date
+    data_type: DATE
+    default_value: 01/01/2024
+    range_config:
+      range_min: 01/01/2000
+      range_max: 12/31/2030
+      include_min: true
+      include_max: true
+    description: ''
+  - id: 5a7b0fcd-d9a4-43b4-91d7-d8a7764d9f90
+    name: date_params
+    data_type: DATE
+    default_value: 01/01/2024
+    description: ''
+  - id: ac99789a-97c2-4ff7-a75b-7c90c02232c0
+    name: date_params_range
+    data_type: DATE
+    default_value: 01/01/2023
+    range_config:
+      range_min: 01/01/2023
+      range_max: 12/31/2024
+      include_min: true
+      include_max: true
+    description: ''
+  - id: fb1034b8-9737-4bef-934f-d17bab0edb01
+    name: decimal_params
+    data_type: DOUBLE
+    default_value: '0.25'
+    description: ''
+  - id: 0d3f06eb-024e-4c01-84ba-32feed85619a
+    name: decimal_params_list
+    data_type: DOUBLE
+    default_value: '0.25'
+    list_config:
+      list_choice:
+      - value: '0.0'
+      - value: '0.1'
+      - value: '0.2'
+      - value: '0.25'
+      - value: '0.5'
+      - value: '0.75'
+      - value: '0.9'
+      - value: '0.95'
+      - value: '0.975'
+      - value: '0.99'
+      - value: '1.0'
+    description: ''
+  - id: a6e9f368-a1d0-49f7-ab57-0460e13ef529
+    name: decimal_params_range
+    data_type: DOUBLE
+    default_value: '1.05'
+    range_config:
+      range_min: '-0.9765'
+      range_max: '2.5'
+      include_min: true
+      include_max: true
+    description: ''
+  - id: d84ac6d1-274b-401c-8c3b-dedb493c7d48
+    name: int_params
+    data_type: INT64
+    default_value: '1'
+    description: Integer params ( Any )
+  - id: b795d9f7-2cc6-481c-9fac-5ef8fda881ba
+    name: int_params_list
+    data_type: INT64
+    default_value: '10'
+    list_config:
+      list_choice:
+      - value: '1'
+      - value: '10'
+      - value: '100'
+      - value: '1000'
+      - value: '10000'
+    description: ''
+  - id: bf2d1fc2-b957-4ce9-b292-53539b12d207
+    name: int_params_range
+    data_type: INT64
+    default_value: '1'
+    range_config:
+      range_min: '-10'
+      range_max: '100'
+      include_min: true
+      include_max: true
+    description: ''
+  - id: e07d2869-3778-4056-9188-58079093ce51
+    name: rolling_params
+    data_type: CHAR
+    default_value: rolling 7 day avg
+    list_config:
+      list_choice:
+      - value: rolling 7 day avg
+      - value: rolling 14 day avg
+      - value: rolling 30 day avg
+      - value: rolling 60 day avg
+    description: ''
+  - id: 2f6b1743-f0a3-42e9-b90b-38be4406ecd4
+    name: str_params
+    data_type: CHAR
+    default_value: shirts
+    description: ''
+  - id: 6ced2b8b-a2be-41a9-be56-7b2e926ef3bc
+    name: str_params_list
+    data_type: CHAR
+    default_value: test
+    list_config:
+      list_choice:
+      - value: average
+      - value: total
+      - value: count
+      - value: unique_count
+      - value: test
+    description: ''
+  - id: d1115f7e-2496-4cd8-aef9-cbf90702cdae
+    name: test_list
+    data_type: INT64
+    default_value: '1'
+    list_config:
+      list_choice:
+      - value: '1'
+      - value: '2'
+      - value: '3'
+      - value: '4'
+      - value: '5'
+    description: ''
+  - id: 4d85e281-1580-4a64-8b6a-7793d17adedb
+    name: time grain
+    data_type: CHAR
+    default_value: daily
+    description: ''

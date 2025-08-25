@@ -1,0 +1,25 @@
+guid: d2656e89-7c14-4499-b2f7-2e1ad007e1c0
+table:
+  name: TS_STATES
+  db: NEBULADEV
+  schema: TPCH_COMPLEX_SCHEMA
+  db_table: TS_STATES
+  connection:
+    name: ts_complex_schema
+    fqn: f6b85839-9ee9-4dd6-810b-48dca54441b9
+  columns:
+  - name: STATE
+    db_column_name: STATE
+    properties:
+      column_type: ATTRIBUTE
+    db_column_properties:
+      data_type: VARCHAR
+  - name: REGION
+    db_column_name: REGION
+    properties:
+      column_type: ATTRIBUTE
+    db_column_properties:
+      data_type: VARCHAR
+  properties:
+    sage_config:
+      is_sage_enabled: false

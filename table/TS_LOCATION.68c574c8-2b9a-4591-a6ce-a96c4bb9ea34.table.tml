@@ -1,0 +1,60 @@
+guid: 68c574c8-2b9a-4591-a6ce-a96c4bb9ea34
+table:
+  name: TS_LOCATION
+  db: NEBULADEV
+  schema: TPCH_COMPLEX_SCHEMA
+  db_table: TS_LOCATION
+  connection:
+    name: ts_complex_schema
+    fqn: f6b85839-9ee9-4dd6-810b-48dca54441b9
+  columns:
+  - name: CITY_CODE
+    db_column_name: CITY_CODE
+    properties:
+      column_type: ATTRIBUTE
+    db_column_properties:
+      data_type: VARCHAR
+  - name: CITY
+    db_column_name: CITY
+    properties:
+      column_type: ATTRIBUTE
+    db_column_properties:
+      data_type: VARCHAR
+  - name: STATE_NAME
+    db_column_name: STATE_NAME
+    properties:
+      column_type: ATTRIBUTE
+    db_column_properties:
+      data_type: VARCHAR
+  - name: COUNTY_NAME
+    db_column_name: COUNTY_NAME
+    properties:
+      column_type: ATTRIBUTE
+    db_column_properties:
+      data_type: VARCHAR
+  - name: POPULATION
+    db_column_name: POPULATION
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+    db_column_properties:
+      data_type: INT64
+  - name: DENSITY
+    db_column_name: DENSITY
+    properties:
+      column_type: MEASURE
+      aggregation: SUM
+      index_type: DONT_INDEX
+    db_column_properties:
+      data_type: INT64
+  joins_with:
+  - name: TS_LOCATION_to_TS_STATES
+    destination:
+      name: TS_STATES
+      fqn: d2656e89-7c14-4499-b2f7-2e1ad007e1c0
+    "on": "[TS_LOCATION::STATE_NAME] = [TS_STATES::STATE]"
+    type: INNER
+  properties:
+    sage_config:
+      is_sage_enabled: false
