@@ -35,6 +35,7 @@ liveboard:
         - Total Age
         - Total Budget
         client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\",\"columnProperties\": [{\"columnId\": \"City\",\"columnProperty\": {}},{\"columnId\": \"County Name\",\"columnProperty\": {}},{\"columnId\": \"Day(date_orderedtime)\",\"columnProperty\": {}},{\"columnId\": \"Total Age\",\"columnProperty\": {}},{\"columnId\": \"Total Budget\",\"columnProperty\": {}}]}"
       chart:
         type: ADVANCED_PIVOT_TABLE
         chart_columns:
@@ -95,6 +96,7 @@ liveboard:
         - Total Age
         - Total Budget
         client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\",\"columnProperties\": [{\"columnId\": \"City\",\"columnProperty\": {}},{\"columnId\": \"County Name\",\"columnProperty\": {}},{\"columnId\": \"Day(date_orderedtime)\",\"columnProperty\": {}},{\"columnId\": \"Total Age\",\"columnProperty\": {}},{\"columnId\": \"Total Budget\",\"columnProperty\": {}}]}"
       chart:
         type: ADVANCED_PIVOT_TABLE
         chart_columns:
@@ -156,6 +158,7 @@ liveboard:
         - Total Age
         - Total Budget
         client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\",\"columnProperties\": [{\"columnId\": \"City\",\"columnProperty\": {}},{\"columnId\": \"County Name\",\"columnProperty\": {}},{\"columnId\": \"Day(date_orderedtime)\",\"columnProperty\": {}},{\"columnId\": \"Total Age\",\"columnProperty\": {}},{\"columnId\": \"Total Budget\",\"columnProperty\": {}}]}"
       chart:
         type: ADVANCED_PIVOT_TABLE
         chart_columns:
@@ -186,10 +189,6 @@ liveboard:
             - County Name
       display_mode: CHART_MODE
     viz_guid: a26f7c64-3d83-4232-bdc7-1fec66707f02
-  - id: Viz_4
-    viz_guid: 828fda81-9aaf-4663-9798-df9cd7f09ee4
-    note_tile:
-      html_parsed_string: "<h2 class=\"theme-module__editor-h2\" dir=\"ltr\"><span style=\"white-space: pre-wrap;\">pivot 2.0 version control test</span></h2><p class=\"theme-module__editor-paragraph\"><br></p><div class=\"pinboard-note-tile-module__noteTileBg editor-module__bgNode\" style=\"background-color: rgb(255, 255, 255);\"></div>"
   filters:
   - column:
     - date_ordered
@@ -199,13 +198,13 @@ liveboard:
       oper: between
       date_range:
         start_date: 02/01/2017
-        end_date: 08/19/2023
+        end_date: 08/19/2025
     display_name: ""
   layout:
     tiles:
     - visualization_id: Viz_1
       x: 0
-      "y": 4
+      "y": 0
       height: 8
       width: 6
     - visualization_id: Viz_2
@@ -215,30 +214,13 @@ liveboard:
       width: 6
     - visualization_id: Viz_3
       x: 0
-      "y": 12
+      "y": 8
       height: 8
       width: 6
-    - visualization_id: Viz_4
-      x: 0
-      "y": 0
-      height: 4
-      width: 3
   ordered_chips:
   - name: date_ordered
     type: FILTER
   views:
-  - view_guid: ae8c36a3-a387-4aff-b253-da3a06b1f72a
-    name: lb v2
-    view_filters:
-    - column:
-      - date_ordered
-      date_filter:
-        type: EXACT_DATE_RANGE
-        oper: between
-        date_range:
-          start_date: 02/01/2017
-          end_date: 08/19/2023
-    is_public: false
   - view_guid: 40fd13e7-5a1a-423d-a65f-005d9d014eff
     name: lb v1
     view_filters:
