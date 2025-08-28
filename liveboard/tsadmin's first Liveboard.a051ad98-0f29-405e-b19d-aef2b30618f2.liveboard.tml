@@ -129,8 +129,26 @@ liveboard:
         client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"Total sales\",\"columnProperty\": {}},{\"columnId\": \"Measure names\",\"columnProperty\": {}},{\"columnId\": \"Measure values\",\"columnProperty\": {}},{\"columnId\": \"city\",\"columnProperty\": {}},{\"columnId\": \"county\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"a1ddf9c1-915d-411a-a74a-814f180f3d85\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total sales\"],\"isOpposite\": false}},{\"id\": \"deeb72bc-0195-44db-b4d8-571f804b5f83\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"city\"]}}],\"systemSeriesColors\": [{\"serieName\": \"Total sales\",\"color\": \"#FF8142\"}]}"
       display_mode: CHART_MODE
     viz_guid: bf76d686-62b6-4c63-8271-3bba30cec2bf
+  filters:
+  - column:
+    - county
+    oper: in
+    values:
+    - ada county
+    - alameda county
+    - boulder county
+    - carroll county
+    is_mandatory: false
+    is_single_value: false
+    display_name: ""
   layout:
     tiles:
     - visualization_id: Viz_1
+      size: MEDIUM
     - visualization_id: Viz_2
+      size: MEDIUM
     - visualization_id: Viz_3
+      size: MEDIUM
+  ordered_chips:
+  - name: county
+    type: FILTER
