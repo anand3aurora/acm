@@ -199,7 +199,7 @@ liveboard:
       oper: between
       date_range:
         start_date: 02/01/2017
-        end_date: 08/19/2025
+        end_date: 08/19/2023
     display_name: ""
   layout:
     tiles:
