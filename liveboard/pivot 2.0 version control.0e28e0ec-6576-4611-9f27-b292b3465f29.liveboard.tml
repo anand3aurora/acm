@@ -186,6 +186,10 @@ liveboard:
             - County Name
       display_mode: CHART_MODE
     viz_guid: a26f7c64-3d83-4232-bdc7-1fec66707f02
+  - id: Viz_4
+    viz_guid: 828fda81-9aaf-4663-9798-df9cd7f09ee4
+    note_tile:
+      html_parsed_string: "<h2 class=\"theme-module__editor-h2\" dir=\"ltr\"><span style=\"white-space: pre-wrap;\">pivot 2.0 version control test</span></h2><p class=\"theme-module__editor-paragraph\"><br></p><div class=\"pinboard-note-tile-module__noteTileBg editor-module__bgNode\" style=\"background-color: rgb(255, 255, 255);\"></div>"
   filters:
   - column:
     - date_ordered
@@ -201,7 +205,7 @@ liveboard:
     tiles:
     - visualization_id: Viz_1
       x: 0
-      "y": 0
+      "y": 4
       height: 8
       width: 6
     - visualization_id: Viz_2
@@ -211,9 +215,14 @@ liveboard:
       width: 6
     - visualization_id: Viz_3
       x: 0
-      "y": 8
+      "y": 12
       height: 8
       width: 6
+    - visualization_id: Viz_4
+      x: 0
+      "y": 0
+      height: 4
+      width: 3
   ordered_chips:
   - name: date_ordered
     type: FILTER
