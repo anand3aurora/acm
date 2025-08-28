@@ -1,0 +1,193 @@
+guid: 0e28e0ec-6576-4611-9f27-b292b3465f29
+liveboard:
+  name: pivot 2.0 version control
+  visualizations:
+  - id: Viz_1
+    answer:
+      name: Total Age by City and Measure names
+      tables:
+      - id: Golden_MODEL_ACM
+        name: Golden_MODEL_ACM
+        fqn: 11a5394c-5b22-4dbd-9d39-1e632315cd85
+      search_query: "[Age] [Budget] [City] [County Name] [date_orderedtime] [date_orderedtime].daily"
+      answer_columns:
+      - name: City
+      - name: County Name
+      - name: Day(date_orderedtime)
+      - name: Total Age
+      - name: Total Budget
+      table:
+        table_columns:
+        - column_id: City
+          show_headline: false
+        - column_id: County Name
+          show_headline: false
+        - column_id: Day(date_orderedtime)
+          show_headline: false
+        - column_id: Total Age
+          show_headline: false
+        - column_id: Total Budget
+          show_headline: false
+        ordered_column_ids:
+        - City
+        - County Name
+        - Day(date_orderedtime)
+        - Total Age
+        - Total Budget
+        client_state: ""
+      chart:
+        type: ADVANCED_PIVOT_TABLE
+        chart_columns:
+        - column_id: City
+        - column_id: County Name
+        - column_id: Day(date_orderedtime)
+        - column_id: Measure names
+          type: MEASURE_NAMES
+        - column_id: Total Age
+        - column_id: Total Budget
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"City\",\"columnProperty\": {}},{\"columnId\": \"County Name\",\"columnProperty\": {}},{\"columnId\": \"Day(date_orderedtime)\",\"columnProperty\": {}},{\"columnId\": \"Total Age\",\"columnProperty\": {}},{\"columnId\": \"Total Budget\",\"columnProperty\": {}},{\"columnId\": \"Measure names\",\"columnProperty\": {}},{\"columnId\": \"Measure values\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"b4409f88-0eee-4d8f-93d5-6f5b688fcbb6\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total Age\"],\"isOpposite\": false}},{\"id\": \"8278201c-c89d-494c-ab1d-9fec3cebe0e2\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total Budget\"],\"isOpposite\": true}},{\"id\": \"9be8f4b4-c0ea-48ec-80f6-19b2049a0b21\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Day(date_orderedtime)\"]}}]}"
+        custom_chart_config:
+        - key: basic
+          dimensions:
+          - key: rows
+            columns:
+            - City
+          - key: values
+            columns:
+            - Total Age
+          - key: columns
+            columns:
+            - Measure names
+          - key: split-by-color
+      display_mode: CHART_MODE
+    viz_guid: 7c58c67c-75e1-4af7-957a-a8069fd265b3
+  - id: Viz_2
+    answer:
+      name: "Total Age by City, Daily date_orderedtime and Measure names"
+      tables:
+      - id: Golden_MODEL_ACM
+        name: Golden_MODEL_ACM
+        fqn: 11a5394c-5b22-4dbd-9d39-1e632315cd85
+      search_query: "[Age] [Budget] [City] [County Name] [date_orderedtime] [date_orderedtime].daily"
+      answer_columns:
+      - name: City
+      - name: County Name
+      - name: Day(date_orderedtime)
+      - name: Total Age
+      - name: Total Budget
+      table:
+        table_columns:
+        - column_id: City
+          show_headline: false
+        - column_id: County Name
+          show_headline: false
+        - column_id: Day(date_orderedtime)
+          show_headline: false
+        - column_id: Total Age
+          show_headline: false
+        - column_id: Total Budget
+          show_headline: false
+        ordered_column_ids:
+        - City
+        - County Name
+        - Day(date_orderedtime)
+        - Total Age
+        - Total Budget
+        client_state: ""
+      chart:
+        type: ADVANCED_PIVOT_TABLE
+        chart_columns:
+        - column_id: City
+        - column_id: County Name
+        - column_id: Day(date_orderedtime)
+        - column_id: Measure names
+          type: MEASURE_NAMES
+        - column_id: Total Age
+        - column_id: Total Budget
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"City\",\"columnProperty\": {}},{\"columnId\": \"County Name\",\"columnProperty\": {}},{\"columnId\": \"Day(date_orderedtime)\",\"columnProperty\": {}},{\"columnId\": \"Total Age\",\"columnProperty\": {}},{\"columnId\": \"Total Budget\",\"columnProperty\": {}},{\"columnId\": \"Measure names\",\"columnProperty\": {}},{\"columnId\": \"Measure values\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"b4409f88-0eee-4d8f-93d5-6f5b688fcbb6\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total Age\"],\"isOpposite\": false}},{\"id\": \"8278201c-c89d-494c-ab1d-9fec3cebe0e2\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total Budget\"],\"isOpposite\": true}},{\"id\": \"9be8f4b4-c0ea-48ec-80f6-19b2049a0b21\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Day(date_orderedtime)\"]}}]}"
+        custom_chart_config:
+        - key: basic
+          dimensions:
+          - key: rows
+            columns:
+            - Day(date_orderedtime)
+            - City
+          - key: values
+            columns:
+            - Total Age
+          - key: columns
+            columns:
+            - Measure names
+          - key: split-by-color
+      display_mode: CHART_MODE
+    viz_guid: 26b27af3-8cdd-42dd-a4e2-456259d3f9b7
+  - id: Viz_3
+    answer:
+      name: "Total Age by City, Daily date_orderedtime and Measure names"
+      tables:
+      - id: Golden_MODEL_ACM
+        name: Golden_MODEL_ACM
+        fqn: 11a5394c-5b22-4dbd-9d39-1e632315cd85
+      search_query: "[Age] [Budget] [City] [County Name] [date_orderedtime] [date_orderedtime].daily"
+      answer_columns:
+      - name: City
+      - name: County Name
+      - name: Day(date_orderedtime)
+      - name: Total Age
+      - name: Total Budget
+      table:
+        table_columns:
+        - column_id: City
+          show_headline: false
+        - column_id: County Name
+          show_headline: false
+        - column_id: Day(date_orderedtime)
+          show_headline: false
+        - column_id: Total Age
+          show_headline: false
+        - column_id: Total Budget
+          show_headline: false
+        ordered_column_ids:
+        - City
+        - County Name
+        - Day(date_orderedtime)
+        - Total Age
+        - Total Budget
+        client_state: ""
+      chart:
+        type: ADVANCED_PIVOT_TABLE
+        chart_columns:
+        - column_id: City
+        - column_id: County Name
+        - column_id: Day(date_orderedtime)
+        - column_id: Measure names
+          type: MEASURE_NAMES
+        - column_id: Total Age
+        - column_id: Total Budget
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"City\",\"columnProperty\": {}},{\"columnId\": \"County Name\",\"columnProperty\": {}},{\"columnId\": \"Day(date_orderedtime)\",\"columnProperty\": {}},{\"columnId\": \"Total Age\",\"columnProperty\": {}},{\"columnId\": \"Total Budget\",\"columnProperty\": {}},{\"columnId\": \"Measure names\",\"columnProperty\": {}},{\"columnId\": \"Measure values\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"b4409f88-0eee-4d8f-93d5-6f5b688fcbb6\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total Age\"],\"isOpposite\": false}},{\"id\": \"8278201c-c89d-494c-ab1d-9fec3cebe0e2\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total Budget\"],\"isOpposite\": true}},{\"id\": \"9be8f4b4-c0ea-48ec-80f6-19b2049a0b21\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Day(date_orderedtime)\"]}}]}"
+        custom_chart_config:
+        - key: basic
+          dimensions:
+          - key: rows
+            columns:
+            - Day(date_orderedtime)
+            - City
+          - key: values
+            columns:
+            - Total Age
+          - key: columns
+            columns:
+            - Measure names
+          - key: split-by-color
+            columns:
+            - County Name
+      display_mode: CHART_MODE
+    viz_guid: a26f7c64-3d83-4232-bdc7-1fec66707f02
+  layout:
+    tiles:
+    - visualization_id: Viz_1
+    - visualization_id: Viz_2
+    - visualization_id: Viz_3
