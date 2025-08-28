@@ -186,8 +186,34 @@ liveboard:
             - County Name
       display_mode: CHART_MODE
     viz_guid: a26f7c64-3d83-4232-bdc7-1fec66707f02
+  filters:
+  - column:
+    - date_ordered
+    is_mandatory: false
+    date_filter:
+      type: EXACT_DATE_RANGE
+      oper: between
+      date_range:
+        start_date: 02/01/2017
+        end_date: 08/19/2025
+    display_name: ""
   layout:
     tiles:
     - visualization_id: Viz_1
+      x: 0
+      "y": 0
+      height: 8
+      width: 6
     - visualization_id: Viz_2
+      x: 6
+      "y": 0
+      height: 8
+      width: 6
     - visualization_id: Viz_3
+      x: 0
+      "y": 8
+      height: 8
+      width: 6
+  ordered_chips:
+  - name: date_ordered
+    type: FILTER
