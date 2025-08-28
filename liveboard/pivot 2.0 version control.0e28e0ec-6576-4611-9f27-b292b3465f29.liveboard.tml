@@ -227,6 +227,18 @@ liveboard:
   - name: date_ordered
     type: FILTER
   views:
+  - view_guid: ae8c36a3-a387-4aff-b253-da3a06b1f72a
+    name: lb v2
+    view_filters:
+    - column:
+      - date_ordered
+      date_filter:
+        type: EXACT_DATE_RANGE
+        oper: between
+        date_range:
+          start_date: 02/01/2017
+          end_date: 08/19/2023
+    is_public: false
   - view_guid: 40fd13e7-5a1a-423d-a65f-005d9d014eff
     name: lb v1
     view_filters:
