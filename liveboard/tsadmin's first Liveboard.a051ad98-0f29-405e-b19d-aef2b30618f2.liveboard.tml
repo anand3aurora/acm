@@ -1,0 +1,136 @@
+guid: a051ad98-0f29-405e-b19d-aef2b30618f2
+liveboard:
+  name: tsadmin's first Liveboard
+  visualizations:
+  - id: Viz_1
+    answer:
+      name: Total sales
+      tables:
+      - id: (Sample) Retail - Apparel
+        name: (Sample) Retail - Apparel
+        fqn: cd252e5c-b552-49a8-821d-3eadaa049cca
+      search_query: "[sales] [county]"
+      answer_columns:
+      - name: Total sales
+      - name: county
+      table:
+        table_columns:
+        - column_id: Total sales
+          show_headline: false
+        - column_id: county
+          show_headline: false
+        ordered_column_ids:
+        - county
+        - Total sales
+        client_state: ""
+      chart:
+        type: GEO_AREA
+        chart_columns:
+        - column_id: Total sales
+        - column_id: county
+        axis_configs:
+        - x:
+          - county
+          "y":
+          - Total sales
+        client_state: ""
+      display_mode: CHART_MODE
+    viz_guid: 98e54785-d688-4fac-b3ac-13537a037e34
+  - id: Viz_2
+    answer:
+      name: Total sales by county and Measure names
+      tables:
+      - id: (Sample) Retail - Apparel
+        name: (Sample) Retail - Apparel
+        fqn: cd252e5c-b552-49a8-821d-3eadaa049cca
+      search_query: "[sales] [county] [city]"
+      answer_columns:
+      - name: Total sales
+      - name: city
+      - name: county
+      table:
+        table_columns:
+        - column_id: Total sales
+          show_headline: false
+        - column_id: city
+          show_headline: false
+        - column_id: county
+          show_headline: false
+        ordered_column_ids:
+        - county
+        - city
+        - Total sales
+        client_state: ""
+      chart:
+        type: ADVANCED_PIVOT_TABLE
+        chart_columns:
+        - column_id: Measure names
+          type: MEASURE_NAMES
+        - column_id: Total sales
+        - column_id: city
+        - column_id: county
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"Total sales\",\"columnProperty\": {}},{\"columnId\": \"Measure names\",\"columnProperty\": {}},{\"columnId\": \"Measure values\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"c244858b-8a25-48b9-b404-3fe49a2c2e15\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total sales\"],\"isOpposite\": false}},{\"id\": \"ff920b73-142f-41c8-bfa7-f1d7b86e2bbe\",\"properties\": {\"axisType\": \"X\"}}]}"
+        custom_chart_config:
+        - key: basic
+          dimensions:
+          - key: rows
+            columns:
+            - county
+          - key: values
+            columns:
+            - Total sales
+          - key: columns
+            columns:
+            - Measure names
+          - key: split-by-color
+      display_mode: CHART_MODE
+    viz_guid: 9f42abe6-f61d-4651-820d-c3a98ec011a2
+  - id: Viz_3
+    answer:
+      name: Total sales by city
+      tables:
+      - id: (Sample) Retail - Apparel
+        name: (Sample) Retail - Apparel
+        fqn: cd252e5c-b552-49a8-821d-3eadaa049cca
+      search_query: "[sales] [county] [city]"
+      answer_columns:
+      - name: Total sales
+      - name: city
+      - name: county
+      table:
+        table_columns:
+        - column_id: Total sales
+          show_headline: false
+        - column_id: city
+          show_headline: false
+        - column_id: county
+          show_headline: false
+        ordered_column_ids:
+        - county
+        - city
+        - Total sales
+        client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\"}"
+      chart:
+        type: SCATTER
+        chart_columns:
+        - column_id: Total sales
+        - column_id: city
+        - column_id: county
+        axis_configs:
+        - x:
+          - city
+          "y":
+          - Total sales
+          category:
+          - county
+        client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"Total sales\",\"columnProperty\": {}},{\"columnId\": \"Measure names\",\"columnProperty\": {}},{\"columnId\": \"Measure values\",\"columnProperty\": {}},{\"columnId\": \"city\",\"columnProperty\": {}},{\"columnId\": \"county\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"a1ddf9c1-915d-411a-a74a-814f180f3d85\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total sales\"],\"isOpposite\": false}},{\"id\": \"deeb72bc-0195-44db-b4d8-571f804b5f83\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"city\"]}}],\"systemSeriesColors\": [{\"serieName\": \"Total sales\",\"color\": \"#FF8142\"}]}"
+      display_mode: CHART_MODE
+    viz_guid: bf76d686-62b6-4c63-8271-3bba30cec2bf
+  layout:
+    tiles:
+    - visualization_id: Viz_1
+    - visualization_id: Viz_2
+    - visualization_id: Viz_3
