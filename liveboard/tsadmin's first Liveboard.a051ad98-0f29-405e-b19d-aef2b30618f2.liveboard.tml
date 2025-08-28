@@ -23,6 +23,7 @@ liveboard:
         - county
         - Total sales
         client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\",\"columnProperties\": [{\"columnId\": \"county\",\"columnProperty\": {}},{\"columnId\": \"Total sales\",\"columnProperty\": {}}]}"
       chart:
         type: GEO_AREA
         chart_columns:
@@ -34,6 +35,7 @@ liveboard:
           "y":
           - Total sales
         client_state: ""
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"gridLines\": {},\"responsiveLayoutPreference\": \"USER_PREFERRED_ON\",\"chartSpecific\": {\"dataFieldArea\": \"column\"}},\"columnProperties\": [{\"columnId\": \"Total sales\",\"columnProperty\": {}},{\"columnId\": \"county\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"5d34ba3f-1306-4e0d-8c4c-be6d55d87967\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total sales\"],\"isOpposite\": false}},{\"id\": \"a4dd49d0-3d92-40c2-b68c-5b9d58f86e60\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"county\"]}}]}"
       display_mode: CHART_MODE
     viz_guid: 98e54785-d688-4fac-b3ac-13537a037e34
   - id: Viz_2
@@ -61,6 +63,7 @@ liveboard:
         - city
         - Total sales
         client_state: ""
+        client_state_v2: "{\"tableVizPropVersion\": \"V1\",\"columnProperties\": [{\"columnId\": \"county\",\"columnProperty\": {}},{\"columnId\": \"city\",\"columnProperty\": {}},{\"columnId\": \"Total sales\",\"columnProperty\": {}}]}"
       chart:
         type: ADVANCED_PIVOT_TABLE
         chart_columns:
@@ -70,7 +73,7 @@ liveboard:
         - column_id: city
         - column_id: county
         client_state: ""
-        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"Total sales\",\"columnProperty\": {}},{\"columnId\": \"Measure names\",\"columnProperty\": {}},{\"columnId\": \"Measure values\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"c244858b-8a25-48b9-b404-3fe49a2c2e15\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total sales\"],\"isOpposite\": false}},{\"id\": \"ff920b73-142f-41c8-bfa7-f1d7b86e2bbe\",\"properties\": {\"axisType\": \"X\"}}]}"
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"Total sales\",\"columnProperty\": {}},{\"columnId\": \"Measure names\",\"columnProperty\": {}},{\"columnId\": \"908dff06-c000-47d3-948b-9d28c23f15dd\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"c244858b-8a25-48b9-b404-3fe49a2c2e15\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total sales\"],\"isOpposite\": false}},{\"id\": \"ff920b73-142f-41c8-bfa7-f1d7b86e2bbe\",\"properties\": {\"axisType\": \"X\"}}]}"
         custom_chart_config:
         - key: basic
           dimensions:
@@ -126,21 +129,9 @@ liveboard:
           category:
           - county
         client_state: ""
-        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"Total sales\",\"columnProperty\": {}},{\"columnId\": \"Measure names\",\"columnProperty\": {}},{\"columnId\": \"Measure values\",\"columnProperty\": {}},{\"columnId\": \"city\",\"columnProperty\": {}},{\"columnId\": \"county\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"a1ddf9c1-915d-411a-a74a-814f180f3d85\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total sales\"],\"isOpposite\": false}},{\"id\": \"deeb72bc-0195-44db-b4d8-571f804b5f83\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"city\"]}}],\"systemSeriesColors\": [{\"serieName\": \"Total sales\",\"color\": \"#FF8142\"}]}"
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"Total sales\",\"columnProperty\": {}},{\"columnId\": \"c11fabaa-c383-49a5-b38e-48785de0bf1b\",\"columnProperty\": {}},{\"columnId\": \"e9ccc3a1-ef8d-4818-995d-d3ef18a39e74\",\"columnProperty\": {}},{\"columnId\": \"city\",\"columnProperty\": {}},{\"columnId\": \"county\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"a1ddf9c1-915d-411a-a74a-814f180f3d85\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total sales\"],\"isOpposite\": false}},{\"id\": \"deeb72bc-0195-44db-b4d8-571f804b5f83\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"city\"]}}],\"systemSeriesColors\": [{\"serieName\": \"Total sales\",\"color\": \"#FF8142\"}]}"
       display_mode: CHART_MODE
     viz_guid: bf76d686-62b6-4c63-8271-3bba30cec2bf
-  filters:
-  - column:
-    - county
-    oper: in
-    values:
-    - ada county
-    - alameda county
-    - boulder county
-    - carroll county
-    is_mandatory: false
-    is_single_value: false
-    display_name: ""
   layout:
     tiles:
     - visualization_id: Viz_1
@@ -149,6 +140,3 @@ liveboard:
       size: MEDIUM
     - visualization_id: Viz_3
       size: MEDIUM
-  ordered_chips:
-  - name: county
-    type: FILTER
