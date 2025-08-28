@@ -4510,6 +4510,10 @@ liveboard:
       display_mode: CHART_MODE
       dynamic_name: geo Satellite Streets
     viz_guid: 8081af91-bd43-4dba-b48b-a2c226025527
+  - id: Viz_95
+    viz_guid: bfd8f211-b31b-41e6-84ab-9ced4faa9fc8
+    note_tile:
+      html_parsed_string: "<h2 class=\"theme-module__editor-h2\" dir=\"ltr\"><span style=\"white-space: pre-wrap;\">pivot 2.0 version control check</span></h2><p class=\"theme-module__editor-paragraph\"><br></p><div class=\"pinboard-note-tile-module__noteTileBg editor-module__bgNode\" style=\"background-color: rgb(255, 255, 255);\"></div>"
   filters:
   - column:
     - year#
@@ -4598,7 +4602,7 @@ liveboard:
       tiles:
       - visualization_id: Viz_2
         x: 0
-        "y": 0
+        "y": 4
         height: 4
         width: 3
       - visualization_id: Viz_3
@@ -4618,24 +4622,29 @@ liveboard:
         width: 3
       - visualization_id: Viz_6
         x: 0
-        "y": 4
+        "y": 8
         height: 4
         width: 12
       - visualization_id: Viz_7
         x: 6
-        "y": 8
+        "y": 12
         height: 8
         width: 6
       - visualization_id: Viz_8
         x: 0
-        "y": 8
+        "y": 12
         height: 8
         width: 6
       - visualization_id: Viz_88
         x: 0
-        "y": 16
+        "y": 20
         height: 8
         width: 6
+      - visualization_id: Viz_95
+        x: 0
+        "y": 0
+        height: 4
+        width: 3
       id: 7e17eaae-3c76-4be9-8c4b-1607be642f5f
     - name: Column
       description: ""
