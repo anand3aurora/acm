@@ -217,3 +217,16 @@ liveboard:
   ordered_chips:
   - name: date_ordered
     type: FILTER
+  views:
+  - view_guid: 40fd13e7-5a1a-423d-a65f-005d9d014eff
+    name: lb v1
+    view_filters:
+    - column:
+      - date_ordered
+      date_filter:
+        type: EXACT_DATE_RANGE
+        oper: between
+        date_range:
+          start_date: 02/01/2022
+          end_date: 08/19/2025
+    is_public: false
