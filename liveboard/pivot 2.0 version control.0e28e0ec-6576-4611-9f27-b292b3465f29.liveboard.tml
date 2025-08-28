@@ -47,7 +47,7 @@ liveboard:
         - column_id: Total Age
         - column_id: Total Budget
         client_state: ""
-        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"City\",\"columnProperty\": {}},{\"columnId\": \"County Name\",\"columnProperty\": {}},{\"columnId\": \"Day(date_orderedtime)\",\"columnProperty\": {}},{\"columnId\": \"Total Age\",\"columnProperty\": {}},{\"columnId\": \"Total Budget\",\"columnProperty\": {}},{\"columnId\": \"Measure names\",\"columnProperty\": {}},{\"columnId\": \"Measure values\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"b4409f88-0eee-4d8f-93d5-6f5b688fcbb6\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total Age\"],\"isOpposite\": false}},{\"id\": \"8278201c-c89d-494c-ab1d-9fec3cebe0e2\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total Budget\"],\"isOpposite\": true}},{\"id\": \"9be8f4b4-c0ea-48ec-80f6-19b2049a0b21\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Day(date_orderedtime)\"]}}]}"
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"City\",\"columnProperty\": {}},{\"columnId\": \"County Name\",\"columnProperty\": {}},{\"columnId\": \"Day(date_orderedtime)\",\"columnProperty\": {}},{\"columnId\": \"Total Age\",\"columnProperty\": {}},{\"columnId\": \"Total Budget\",\"columnProperty\": {}},{\"columnId\": \"Measure names\",\"columnProperty\": {}},{\"columnId\": \"4e3cc516-928f-4e08-83b0-46ff20538a21\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"b4409f88-0eee-4d8f-93d5-6f5b688fcbb6\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total Age\"],\"isOpposite\": false}},{\"id\": \"8278201c-c89d-494c-ab1d-9fec3cebe0e2\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total Budget\"],\"isOpposite\": true}},{\"id\": \"9be8f4b4-c0ea-48ec-80f6-19b2049a0b21\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Day(date_orderedtime)\"]}}]}"
         custom_chart_config:
         - key: basic
           dimensions:
@@ -108,7 +108,7 @@ liveboard:
         - column_id: Total Age
         - column_id: Total Budget
         client_state: ""
-        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"City\",\"columnProperty\": {}},{\"columnId\": \"County Name\",\"columnProperty\": {}},{\"columnId\": \"Day(date_orderedtime)\",\"columnProperty\": {}},{\"columnId\": \"Total Age\",\"columnProperty\": {}},{\"columnId\": \"Total Budget\",\"columnProperty\": {}},{\"columnId\": \"Measure names\",\"columnProperty\": {}},{\"columnId\": \"Measure values\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"b4409f88-0eee-4d8f-93d5-6f5b688fcbb6\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total Age\"],\"isOpposite\": false}},{\"id\": \"8278201c-c89d-494c-ab1d-9fec3cebe0e2\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total Budget\"],\"isOpposite\": true}},{\"id\": \"9be8f4b4-c0ea-48ec-80f6-19b2049a0b21\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Day(date_orderedtime)\"]}}]}"
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"City\",\"columnProperty\": {}},{\"columnId\": \"County Name\",\"columnProperty\": {}},{\"columnId\": \"Day(date_orderedtime)\",\"columnProperty\": {}},{\"columnId\": \"Total Age\",\"columnProperty\": {}},{\"columnId\": \"Total Budget\",\"columnProperty\": {}},{\"columnId\": \"Measure names\",\"columnProperty\": {}},{\"columnId\": \"bc59a020-fb88-4477-b548-8912b37faadf\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"b4409f88-0eee-4d8f-93d5-6f5b688fcbb6\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total Age\"],\"isOpposite\": false}},{\"id\": \"8278201c-c89d-494c-ab1d-9fec3cebe0e2\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total Budget\"],\"isOpposite\": true}},{\"id\": \"9be8f4b4-c0ea-48ec-80f6-19b2049a0b21\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Day(date_orderedtime)\"]}}]}"
         custom_chart_config:
         - key: basic
           dimensions:
@@ -170,7 +170,7 @@ liveboard:
         - column_id: Total Age
         - column_id: Total Budget
         client_state: ""
-        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"City\",\"columnProperty\": {}},{\"columnId\": \"County Name\",\"columnProperty\": {}},{\"columnId\": \"Day(date_orderedtime)\",\"columnProperty\": {}},{\"columnId\": \"Total Age\",\"columnProperty\": {}},{\"columnId\": \"Total Budget\",\"columnProperty\": {}},{\"columnId\": \"Measure names\",\"columnProperty\": {}},{\"columnId\": \"Measure values\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"b4409f88-0eee-4d8f-93d5-6f5b688fcbb6\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total Age\"],\"isOpposite\": false}},{\"id\": \"8278201c-c89d-494c-ab1d-9fec3cebe0e2\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total Budget\"],\"isOpposite\": true}},{\"id\": \"9be8f4b4-c0ea-48ec-80f6-19b2049a0b21\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Day(date_orderedtime)\"]}}]}"
+        client_state_v2: "{\"version\": \"V4DOT2\",\"chartProperties\": {\"chartSpecific\": {\"pivotSummariesState\": {}}},\"columnProperties\": [{\"columnId\": \"City\",\"columnProperty\": {}},{\"columnId\": \"County Name\",\"columnProperty\": {}},{\"columnId\": \"Day(date_orderedtime)\",\"columnProperty\": {}},{\"columnId\": \"Total Age\",\"columnProperty\": {}},{\"columnId\": \"Total Budget\",\"columnProperty\": {}},{\"columnId\": \"Measure names\",\"columnProperty\": {}},{\"columnId\": \"d69af9c1-5471-4431-84c4-e0dae8061801\",\"columnProperty\": {}}],\"axisProperties\": [{\"id\": \"b4409f88-0eee-4d8f-93d5-6f5b688fcbb6\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total Age\"],\"isOpposite\": false}},{\"id\": \"8278201c-c89d-494c-ab1d-9fec3cebe0e2\",\"properties\": {\"axisType\": \"Y\",\"linkedColumns\": [\"Total Budget\"],\"isOpposite\": true}},{\"id\": \"9be8f4b4-c0ea-48ec-80f6-19b2049a0b21\",\"properties\": {\"axisType\": \"X\",\"linkedColumns\": [\"Day(date_orderedtime)\"]}}]}"
         custom_chart_config:
         - key: basic
           dimensions:
@@ -189,6 +189,10 @@ liveboard:
             - County Name
       display_mode: CHART_MODE
     viz_guid: a26f7c64-3d83-4232-bdc7-1fec66707f02
+  - id: Viz_4
+    viz_guid: 828fda81-9aaf-4663-9798-df9cd7f09ee4
+    note_tile:
+      html_parsed_string: "<h2 class=\"theme-module__editor-h2\" dir=\"ltr\"><span style=\"white-space: pre-wrap;\">pivot 2.0 version control test</span></h2><p class=\"theme-module__editor-paragraph\"><br></p><div class=\"pinboard-note-tile-module__noteTileBg editor-module__bgNode\" style=\"background-color: rgb(255, 255, 255);\"></div>"
   filters:
   - column:
     - date_ordered
@@ -198,13 +202,13 @@ liveboard:
       oper: between
       date_range:
         start_date: 02/01/2017
-        end_date: 08/19/2025
+        end_date: 08/19/2023
     display_name: ""
   layout:
     tiles:
     - visualization_id: Viz_1
       x: 0
-      "y": 0
+      "y": 4
       height: 8
       width: 6
     - visualization_id: Viz_2
@@ -214,9 +218,14 @@ liveboard:
       width: 6
     - visualization_id: Viz_3
       x: 0
-      "y": 8
+      "y": 12
       height: 8
       width: 6
+    - visualization_id: Viz_4
+      x: 0
+      "y": 0
+      height: 4
+      width: 3
   ordered_chips:
   - name: date_ordered
     type: FILTER
